@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.mycompany.st10452402part2prog5121.ST10452402PART2PROG5121Test" time="0.085" tests="27" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.mycompany.st10452402part2prog5121.ST10452402PART2PROG5121Test" time="0.108" tests="27" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="21"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -15,9 +15,8 @@
     <property name="user.country" value="ZA"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-21\bin"/>
-    <property name="sun.java.command" value="C:\Users\sohan\AppData\Local\Temp\surefire10010505622325799076\surefirebooter-20250525232447600_3.jar C:\Users\sohan\AppData\Local\Temp\surefire10010505622325799076 2025-05-25T23-24-47_470-jvmRun1 surefire-20250525232447600_1tmp surefire_0-20250525232447600_2tmp"/>
+    <property name="sun.java.command" value="C:\Users\sohan\AppData\Local\Temp\surefire1400685678435144937\surefirebooter-20250526012244713_3.jar C:\Users\sohan\AppData\Local\Temp\surefire1400685678435144937 2025-05-26T01-22-44_534-jvmRun1 surefire-20250526012244713_1tmp surefire_0-20250526012244713_2tmp"/>
     <property name="jdk.debug" value="release"/>
-    <property name="test" value="com.mycompany.st10452402part2prog5121.ST10452402PART2PROG5121Test"/>
     <property name="surefire.test.class.path" value="C:\Users\sohan\Downloads\programming-1a-part-1-ST10452402-master\ST10452402PART2PROG5121\target\test-classes;C:\Users\sohan\Downloads\programming-1a-part-1-ST10452402-master\ST10452402PART2PROG5121\target\classes;C:\Users\sohan\.m2\repository\com\google\code\gson\gson\2.10.1\gson-2.10.1.jar;C:\Users\sohan\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.3\junit-jupiter-api-5.10.3.jar;C:\Users\sohan\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\sohan\.m2\repository\org\junit\platform\junit-platform-commons\1.10.3\junit-platform-commons-1.10.3.jar;C:\Users\sohan\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\sohan\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.10.3\junit-jupiter-params-5.10.3.jar;C:\Users\sohan\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.10.3\junit-jupiter-engine-5.10.3.jar;C:\Users\sohan\.m2\repository\org\junit\platform\junit-platform-engine\1.10.3\junit-platform-engine-1.10.3.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
     <property name="user.home" value="C:\Users\sohan"/>
@@ -31,7 +30,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\sohan\AppData\Local\Temp\surefire10010505622325799076\surefirebooter-20250525232447600_3.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\sohan\AppData\Local\Temp\surefire1400685678435144937\surefirebooter-20250526012244713_3.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="21.0.7+8-LTS-245"/>
@@ -60,31 +59,31 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="65.0"/>
   </properties>
-  <testcase name="testUsernameIncorrectlyFormattedMessage" classname="com.mycompany.st10452402part2prog5121.ST10452402PART2PROG5121Test" time="0.021"/>
-  <testcase name="testMessage2HashGeneration" classname="com.mycompany.st10452402part2prog5121.ST10452402PART2PROG5121Test" time="0.007"/>
-  <testcase name="testCellNumberCorrectlyFormattedMessage" classname="com.mycompany.st10452402part2prog5121.ST10452402PART2PROG5121Test" time="0.001"/>
-  <testcase name="testMessageHashGeneration" classname="com.mycompany.st10452402part2prog5121.ST10452402PART2PROG5121Test" time="0.001"/>
-  <testcase name="testPhoneNumberCorrectlyFormattedBoolean" classname="com.mycompany.st10452402part2prog5121.ST10452402PART2PROG5121Test" time="0.002"/>
-  <testcase name="testLoginSuccess" classname="com.mycompany.st10452402part2prog5121.ST10452402PART2PROG5121Test" time="0.001"/>
+  <testcase name="testUsernameIncorrectlyFormattedMessage" classname="com.mycompany.st10452402part2prog5121.ST10452402PART2PROG5121Test" time="0.018"/>
+  <testcase name="testMessage2HashGeneration" classname="com.mycompany.st10452402part2prog5121.ST10452402PART2PROG5121Test" time="0.009"/>
+  <testcase name="testCellNumberCorrectlyFormattedMessage" classname="com.mycompany.st10452402part2prog5121.ST10452402PART2PROG5121Test" time="0.003"/>
+  <testcase name="testMessageHashGeneration" classname="com.mycompany.st10452402part2prog5121.ST10452402PART2PROG5121Test" time="0.0"/>
+  <testcase name="testPhoneNumberCorrectlyFormattedBoolean" classname="com.mycompany.st10452402part2prog5121.ST10452402PART2PROG5121Test" time="0.0"/>
+  <testcase name="testLoginSuccess" classname="com.mycompany.st10452402part2prog5121.ST10452402PART2PROG5121Test" time="0.0"/>
   <testcase name="testMessageSentStatus" classname="com.mycompany.st10452402part2prog5121.ST10452402PART2PROG5121Test" time="0.001"/>
-  <testcase name="testCellNumberIncorrectlyFormattedMessage" classname="com.mycompany.st10452402part2prog5121.ST10452402PART2PROG5121Test" time="0.001"/>
+  <testcase name="testCellNumberIncorrectlyFormattedMessage" classname="com.mycompany.st10452402part2prog5121.ST10452402PART2PROG5121Test" time="0.002"/>
   <testcase name="testLoginFail" classname="com.mycompany.st10452402part2prog5121.ST10452402PART2PROG5121Test" time="0.001"/>
   <testcase name="testValidMessageLength" classname="com.mycompany.st10452402part2prog5121.ST10452402PART2PROG5121Test" time="0.0"/>
-  <testcase name="testPasswordMeetsComplexityBoolean" classname="com.mycompany.st10452402part2prog5121.ST10452402PART2PROG5121Test" time="0.0"/>
-  <testcase name="testMessage2RecipientValid" classname="com.mycompany.st10452402part2prog5121.ST10452402PART2PROG5121Test" time="0.001"/>
+  <testcase name="testPasswordMeetsComplexityBoolean" classname="com.mycompany.st10452402part2prog5121.ST10452402PART2PROG5121Test" time="0.001"/>
+  <testcase name="testMessage2RecipientValid" classname="com.mycompany.st10452402part2prog5121.ST10452402PART2PROG5121Test" time="0.0"/>
   <testcase name="testPhoneNumberIncorrectlyFormattedBoolean" classname="com.mycompany.st10452402part2prog5121.ST10452402PART2PROG5121Test" time="0.001"/>
   <testcase name="testMessage2SendStatus" classname="com.mycompany.st10452402part2prog5121.ST10452402PART2PROG5121Test" time="0.001"/>
   <testcase name="testMessageDisregardedStatus" classname="com.mycompany.st10452402part2prog5121.ST10452402PART2PROG5121Test" time="0.001"/>
-  <testcase name="testPasswordFailsComplexityBoolean" classname="com.mycompany.st10452402part2prog5121.ST10452402PART2PROG5121Test" time="0.001"/>
-  <testcase name="testInvalidMessageLength" classname="com.mycompany.st10452402part2prog5121.ST10452402PART2PROG5121Test" time="0.002"/>
+  <testcase name="testPasswordFailsComplexityBoolean" classname="com.mycompany.st10452402part2prog5121.ST10452402PART2PROG5121Test" time="0.002"/>
+  <testcase name="testInvalidMessageLength" classname="com.mycompany.st10452402part2prog5121.ST10452402PART2PROG5121Test" time="0.003"/>
   <testcase name="testUsernameCorrectlyFormattedBoolean" classname="com.mycompany.st10452402part2prog5121.ST10452402PART2PROG5121Test" time="0.001"/>
-  <testcase name="testPasswordIncorrectlyFormattedMessage" classname="com.mycompany.st10452402part2prog5121.ST10452402PART2PROG5121Test" time="0.0"/>
+  <testcase name="testPasswordIncorrectlyFormattedMessage" classname="com.mycompany.st10452402part2prog5121.ST10452402PART2PROG5121Test" time="0.001"/>
   <testcase name="testPasswordCorrectlyFormattedMessage" classname="com.mycompany.st10452402part2prog5121.ST10452402PART2PROG5121Test" time="0.001"/>
-  <testcase name="testMessage2LengthValidation" classname="com.mycompany.st10452402part2prog5121.ST10452402PART2PROG5121Test" time="0.0"/>
-  <testcase name="testUsernameIncorrectlyFormattedBoolean" classname="com.mycompany.st10452402part2prog5121.ST10452402PART2PROG5121Test" time="0.0"/>
-  <testcase name="testMessageIdIsGenerated" classname="com.mycompany.st10452402part2prog5121.ST10452402PART2PROG5121Test" time="0.0"/>
-  <testcase name="testUsernameCorrectlyFormattedMessage" classname="com.mycompany.st10452402part2prog5121.ST10452402PART2PROG5121Test" time="0.002"/>
+  <testcase name="testMessage2LengthValidation" classname="com.mycompany.st10452402part2prog5121.ST10452402PART2PROG5121Test" time="0.001"/>
+  <testcase name="testUsernameIncorrectlyFormattedBoolean" classname="com.mycompany.st10452402part2prog5121.ST10452402PART2PROG5121Test" time="0.001"/>
+  <testcase name="testMessageIdIsGenerated" classname="com.mycompany.st10452402part2prog5121.ST10452402PART2PROG5121Test" time="0.001"/>
+  <testcase name="testUsernameCorrectlyFormattedMessage" classname="com.mycompany.st10452402part2prog5121.ST10452402PART2PROG5121Test" time="0.004"/>
   <testcase name="testMessageStoredStatus" classname="com.mycompany.st10452402part2prog5121.ST10452402PART2PROG5121Test" time="0.001"/>
-  <testcase name="testRecipientPhoneNumberCorrectFormat" classname="com.mycompany.st10452402part2prog5121.ST10452402PART2PROG5121Test" time="0.0"/>
-  <testcase name="testRecipientPhoneNumberIncorrectFormat" classname="com.mycompany.st10452402part2prog5121.ST10452402PART2PROG5121Test" time="0.002"/>
+  <testcase name="testRecipientPhoneNumberCorrectFormat" classname="com.mycompany.st10452402part2prog5121.ST10452402PART2PROG5121Test" time="0.001"/>
+  <testcase name="testRecipientPhoneNumberIncorrectFormat" classname="com.mycompany.st10452402part2prog5121.ST10452402PART2PROG5121Test" time="0.001"/>
 </testsuite>

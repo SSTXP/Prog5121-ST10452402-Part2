@@ -19,5 +19,19 @@
     "content": "test for JSON file(1)",
     "messageHash": "00:0000000001:TESTFILE(1)",
     "status": 0
+  },
+  {
+    "messageNumber": "0000000002",
+    "recipientNumber": "+27721858809",
+    "content": "test 3 store",
+    "messageHash": "00:0000000002:TESTSTORE",
+    "status": 0
+  },
+  {
+    "messageNumber": "0000000002",
+    "recipientNumber": "+27721858809",
+    "content": "test stored (3)",
+    "messageHash": "00:0000000002:TEST(3)",
+    "status": 0
   }
 ]
