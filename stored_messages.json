@@ -1,0 +1,23 @@
+[
+  {
+    "messageNumber": "0000000001",
+    "recipientNumber": "+27721858845",
+    "content": "something something ........!!!!",
+    "messageHash": "00:0000000001:SOMETHING........!!!!",
+    "status": 0
+  },
+  {
+    "messageNumber": "0000000002",
+    "recipientNumber": "+27721859901",
+    "content": "bye!!!!",
+    "messageHash": "00:0000000002:BYE!!!!BYE!!!!",
+    "status": 0
+  },
+  {
+    "messageNumber": "0000000001",
+    "recipientNumber": "+27721858801",
+    "content": "test for JSON file(1)",
+    "messageHash": "00:0000000001:TESTFILE(1)",
+    "status": 0
+  }
+]
