@@ -5,4 +5,4 @@ Student Number: ST10452402
  * Assessment Type: Assignment 1(Part 1 & 2)
  * Lecturer Name: Mr Fakazi Ngema 
  * 
- *  https://youtube/yHP4Cew7WXE?si=pAHC8LO4RF6wl33r -- video of working code Part 1
+ *  https://youtu.be/yHP4Cew7WXE -- video of working code Part 1
