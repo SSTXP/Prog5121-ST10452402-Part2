@@ -19,7 +19,9 @@ import java.util.ArrayList;
  * Assessment Type: Assignment 1(POE)
  * Lecturer Name: Mr Fakazi Ngema 
  * 
- * 
+ * https://youtu.be/yHP4Cew7WXE -- Part 1 video link
+ * https://youtu.be/cGZHQ2AysA0 -- Part 2 video link
+ * https://youtu.be/ZupsyIJjN9g -- Part 3 video link
  * 
  */
 
