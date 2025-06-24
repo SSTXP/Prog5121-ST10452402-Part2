@@ -14,9 +14,10 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
- /*
+
+/*
  * @author sohan
- * * Student Number: ST10452402    
+ * Student Number: ST10452402    
  * Name and Surname: Sohan Seeth    
  * Module: PROG5121 
  * Module Code: Programming 1A 
@@ -34,10 +35,15 @@ public class ST10452402PART2PROG5121 {
     private String registeredUsername;
     private String registeredPassword;
 
-    private final ArrayList<Message> sentMessages = new ArrayList<>();
+    final ArrayList<Message> sentMessages = new ArrayList<>();
 
     private int messageCounter = 0;
+    
+    public List<Message> getSentMessages() {
+        return sentMessages;
+    }
 
+    // Inner Message class
     class Message {
         String messageNumber;
         String recipientNumber;
@@ -81,6 +87,7 @@ public class ST10452402PART2PROG5121 {
         }
     }
 
+    // Validation methods
     public boolean checkUserName(String username) {
         return username.contains("_") && username.length() <= 5;
     }
@@ -101,6 +108,7 @@ public class ST10452402PART2PROG5121 {
         return name.matches("^[A-Za-z]+$");
     }
 
+    // Registration & login
     public String registerUser(String firstName, String lastName, String username, String password, String phone) {
         this.registeredFirstName = firstName;
         this.registeredLastName = lastName;
@@ -126,69 +134,96 @@ public class ST10452402PART2PROG5121 {
         return word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase();
     }
 
-    private static String getValidatedInput(String message, String error, java.util.function.Predicate<String> validator) {
-        for (int i = 1; i <= 3; i++) {
+    /**
+     * Shows a simple welcome message screen.
+     */
+    private static void showWelcomeScreen() {
+        JOptionPane.showMessageDialog(null,
+                "Welcome to QuickChat!\n\nYour easy messaging app.\n\nClick OK to proceed to registration and login.");
+    }
+
+    /**
+     * Improved input method with infinite retries until valid input or user cancels.
+     */
+    private static String getValidatedInputWithRetries(String message, String error, java.util.function.Predicate<String> validator) {
+        while (true) {
             String input = JOptionPane.showInputDialog(message);
-            if (input != null && validator.test(input)) return input;
-            JOptionPane.showMessageDialog(null, error + " (" + i + "/3 attempts)");
+            if (input == null) {
+                int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to exit?", "Confirm Exit", JOptionPane.YES_NO_OPTION);
+                if (confirm == JOptionPane.YES_OPTION) {
+                    JOptionPane.showMessageDialog(null, "Exiting application. Goodbye!");
+                    System.exit(0);
+                } else {
+                    continue;
+                }
+            }
+            if (validator.test(input)) return input;
+            JOptionPane.showMessageDialog(null, error);
         }
-        JOptionPane.showMessageDialog(null, "Too many invalid attempts. The application will now exit.");
-        System.exit(0);
-        return null;
     }
 
+    /**
+     * Send messages method - allows sending, disregarding, or storing messages.
+     */
     public void sendMessages() {
-    int totalMessages = Integer.parseInt(JOptionPane.showInputDialog("How many messages would you like to compose?"));
+        int totalMessages = Integer.parseInt(JOptionPane.showInputDialog("How many messages would you like to compose?"));
 
-    for (int i = 0; i < totalMessages; i++) {
-        messageCounter++;
-        String messageNumber = String.format("%010d", messageCounter);
+        for (int i = 0; i < totalMessages; i++) {
+            messageCounter++;
+            String messageNumber = String.format("%010d", messageCounter);
 
-        String recipient = getValidatedInput(
-                "Enter recipient number (format: +27XXXXXXXXX):",
-                "Invalid phone number. It must start with +27 and have exactly 9 digits after.",
-                this::checkCellPhoneNumber
-        );
+            String recipient = getValidatedInputWithRetries(
+                    "Enter recipient number (format: +27XXXXXXXXX):",
+                    "Invalid phone number. It must start with +27 and have exactly 9 digits after.",
+                    this::checkCellPhoneNumber
+            );
 
-        String content = JOptionPane.showInputDialog("Enter message content (max 50 characters):");
+            String content = JOptionPane.showInputDialog("Enter message content (max 50 characters):");
 
-        if (content.length() > 50) {
-            JOptionPane.showMessageDialog(null, "Please enter a message of less than 50 characters.");
-            i--;
-            continue;
-        }
-
-        Message message = new Message(messageNumber, recipient, content);
-
-        String[] options = {"Send Message", "Disregard Message", "Store Message to Send Later"};
-        int choice = JOptionPane.showOptionDialog(null, message.toString(), "Message Options",
-                JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
-
-        switch (choice) {
-            case 0 -> {
-                message.status = 1;
-                sentMessages.add(message);
-                // Requirement 7: Show full details after sending
-                String details = "MessageID: " + message.messageNumber + "\n"
-                        + "Message Hash: " + message.messageHash + "\n"
-                        + "Recipient: " + message.recipientNumber + "\n"
-                        + "Message: " + message.content;
-                JOptionPane.showMessageDialog(null, "Message sent!\n\n" + details);
+            if (content == null || content.length() == 0) {
+                JOptionPane.showMessageDialog(null, "Message cannot be empty.");
+                i--;
+                continue;
             }
-            case 2 -> {
-                message.status = 0;
-                storeMessageToJson(message);  // ✅ Saves to stored_messages.json
-                JOptionPane.showMessageDialog(null, "Message stored for later.");
+            if (content.length() > 50) {
+                JOptionPane.showMessageDialog(null, "Please enter a message of 50 characters or less.");
+                i--;
+                continue;
             }
-            default -> JOptionPane.showMessageDialog(null, "Message disregarded.");
+
+            Message message = new Message(messageNumber, recipient, content);
+
+            String[] options = {"Send Message", "Disregard Message", "Store Message to Send Later"};
+            int choice = JOptionPane.showOptionDialog(null, message.toString(), "Message Options",
+                    JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
+
+            switch (choice) {
+                case 0 -> {
+                    message.status = 1;
+                    sentMessages.add(message);
+                    // Show full details after sending
+                    String details = "MessageID: " + message.messageNumber + "\n"
+                            + "Message Hash: " + message.messageHash + "\n"
+                            + "Recipient: " + message.recipientNumber + "\n"
+                            + "Message: " + message.content;
+                    JOptionPane.showMessageDialog(null, "Message sent!\n\n" + details);
+                }
+                case 2 -> {
+                    message.status = 0;
+                    storeMessageToJson(message);  // Saves to stored_messages.json
+                    JOptionPane.showMessageDialog(null, "Message stored for later.");
+                }
+                default -> JOptionPane.showMessageDialog(null, "Message disregarded.");
+            }
         }
+        // Show total messages sent (status == 1)
+        long sentCount = sentMessages.stream().filter(m -> m.status == 1).count();
+        JOptionPane.showMessageDialog(null, "Total messages sent: " + sentCount);
     }
-    // Requirement 8: Show total messages sent (status == 1)
-    long sentCount = sentMessages.stream().filter(m -> m.status == 1).count();
-    JOptionPane.showMessageDialog(null, "Total messages sent: " + sentCount);
-}
 
-
+    /**
+     * Show all sent messages.
+     */
     public void showSentMessages() {
         if (sentMessages.isEmpty()) {
             JOptionPane.showMessageDialog(null, "No messages have been sent yet.");
@@ -201,79 +236,259 @@ public class ST10452402PART2PROG5121 {
         JOptionPane.showMessageDialog(null, log.toString());
     }
 
+    // --- Placeholder methods for Part 3 features --- 
+    // You should implement these based on your Part 3 requirements
+
+    public void displaySendersAndRecipients() {
+        if (sentMessages.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No sent messages to display.");
+            return;
+        }
+        StringBuilder sb = new StringBuilder("Senders and Recipients:\n");
+        for (Message msg : sentMessages) {
+            sb.append("Sender: ").append(registeredUsername).append("\n");
+            sb.append("Recipient: ").append(msg.recipientNumber).append("\n\n");
+        }
+        JOptionPane.showMessageDialog(null, sb.toString());
+    }
+
+    public void displayLongestSentMessage() {
+        if (sentMessages.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No sent messages available.");
+            return;
+        }
+        Message longest = sentMessages.get(0);
+        for (Message m : sentMessages) {
+            if (m.content.length() > longest.content.length()) {
+                longest = m;
+            }
+        }
+        JOptionPane.showMessageDialog(null, "Longest sent message:\n" + longest.content);
+    }
+
+    public void searchByMessageID() {
+        String id = JOptionPane.showInputDialog("Enter the message ID to search:");
+        if (id == null || id.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No ID entered.");
+            return;
+        }
+        for (Message msg : sentMessages) {
+            if (msg.messageNumber.equals(id)) {
+                JOptionPane.showMessageDialog(null,
+                        "Message found:\nRecipient: " + msg.recipientNumber + "\nMessage: " + msg.content);
+                return;
+            }
+        }
+        JOptionPane.showMessageDialog(null, "Message ID not found.");
+    }
+
+    public void searchMessagesByRecipient() {
+        String recipient = JOptionPane.showInputDialog("Enter recipient number to search messages for:");
+        if (recipient == null || recipient.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No recipient entered.");
+            return;
+        }
+        StringBuilder sb = new StringBuilder("Messages sent to " + recipient + ":\n");
+        boolean found = false;
+        for (Message msg : sentMessages) {
+            if (msg.recipientNumber.equals(recipient)) {
+                sb.append(msg.content).append("\n\n");
+                found = true;
+            }
+        }
+        if (found) {
+            JOptionPane.showMessageDialog(null, sb.toString());
+        } else {
+            JOptionPane.showMessageDialog(null, "No messages found for this recipient.");
+        }
+    }
+
+    public void deleteMessageByHash() {
+        String hash = JOptionPane.showInputDialog("Enter the message hash to delete:");
+        if (hash == null || hash.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No hash entered.");
+            return;
+        }
+        for (int i = 0; i < sentMessages.size(); i++) {
+            if (sentMessages.get(i).messageHash.equalsIgnoreCase(hash)) {
+                Message removed = sentMessages.remove(i);
+                JOptionPane.showMessageDialog(null, "Message \"" + removed.content + "\" successfully deleted.");
+                return;
+            }
+        }
+        JOptionPane.showMessageDialog(null, "Message hash not found.");
+    }
+
+    public void displaySentMessageReport() {
+        if (sentMessages.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No sent messages to report.");
+            return;
+        }
+        StringBuilder sb = new StringBuilder("Sent Messages Report:\n");
+        for (Message msg : sentMessages) {
+            sb.append("Hash: ").append(msg.messageHash).append("\n");
+            sb.append("Recipient: ").append(msg.recipientNumber).append("\n");
+            sb.append("Message: ").append(msg.content).append("\n\n");
+        }
+        JOptionPane.showMessageDialog(null, sb.toString());
+    }
+
+    /**
+     * Load stored messages from JSON file at startup.
+     */
+    public void loadStoredMessagesFromJson() {
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        List<Message> storedMessages = new ArrayList<>();
+
+        try (Reader reader = new FileReader("stored_messages.json")) {
+            Type listType = new TypeToken<List<Message>>() {}.getType();
+            storedMessages = gson.fromJson(reader, listType);
+            if (storedMessages != null) {
+                // Add loaded messages to sentMessages for this example
+                sentMessages.addAll(storedMessages);
+            }
+        } catch (FileNotFoundException e) {
+            // No stored messages yet, no problem
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Error reading stored messages: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Store message to JSON file (for storing messages to send later).
+     */
+    public void storeMessageToJson(Message message) {
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        List<Message> storedMessages = new ArrayList<>();
+
+        // Try to read existing messages
+        try (Reader reader = new FileReader("stored_messages.json")) {
+            Type listType = new TypeToken<List<Message>>() {}.getType();
+            storedMessages = gson.fromJson(reader, listType);
+            if (storedMessages == null) storedMessages = new ArrayList<>();
+        } catch (FileNotFoundException e) {
+            // File doesn't exist — that's OK
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Error reading stored messages: " + e.getMessage());
+        }
+
+        // Add new message and write to file
+        storedMessages.add(message);
+
+        try (Writer writer = new FileWriter("stored_messages.json")) {
+            gson.toJson(storedMessages, writer);
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Error saving message: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Main program entry point.
+     */
     public static void main(String[] args) {
         ST10452402PART2PROG5121 app = new ST10452402PART2PROG5121();
 
-        String firstName = getValidatedInput(
-                "Enter your first name (letters only):", "Invalid input.", app::isNameValid);
-        String lastName = getValidatedInput(
-                "Enter your last name (letters only):", "Invalid input.", app::isNameValid);
-        String username = getValidatedInput(
-                "Create a username (underscore, max 5 chars):", "Invalid username.", app::checkUserName);
-        String password = getValidatedInput(
-                "Create a password (8+ chars, 1 uppercase, 1 digit, 1 special char):", "Invalid password.", app::checkPasswordComplexity);
-        String phone = getValidatedInput(
-                "Enter your phone number (+27XXXXXXXXX):", "Invalid phone number.", app::checkCellPhoneNumber);
+        // Show welcome screen
+        showWelcomeScreen();
+
+        // Registration inputs with retries
+        String firstName = getValidatedInputWithRetries(
+                "Welcome to QuickChat!\nPlease enter your first name (letters only):", "Invalid input. Please use letters only.", app::isNameValid);
+
+        String lastName = getValidatedInputWithRetries(
+                "Please enter your last name (letters only):", "Invalid input. Please use letters only.", app::isNameValid);
+
+        String username = getValidatedInputWithRetries(
+                "Create a username (must contain underscore '_', max 5 chars):", "Invalid username.", app::checkUserName);
+
+        String password = getValidatedInputWithRetries(
+                "Create a password (8+ chars, at least 1 uppercase, 1 digit, 1 special char):", "Invalid password.", app::checkPasswordComplexity);
+
+        String phone = getValidatedInputWithRetries(
+                "Enter your phone number (format: +27XXXXXXXXX, e.g. +27123456789):", "Invalid phone number.", app::checkCellPhoneNumber);
 
         JOptionPane.showMessageDialog(null, app.registerUser(firstName, lastName, username, password, phone));
 
-        for (int attempt = 1; attempt <= 3; attempt++) {
+        // Load any stored messages from previous sessions
+        app.loadStoredMessagesFromJson();
+
+        // Login attempts with retry
+        boolean loggedIn = false;
+        for (int attempt = 1; attempt <= 3 && !loggedIn; attempt++) {
             String loginUsername = JOptionPane.showInputDialog("Login attempt " + attempt + "/3\nUsername:");
             String loginPassword = JOptionPane.showInputDialog("Password:");
 
             if (app.loginUser(loginUsername, loginPassword)) {
+                loggedIn = true;
                 JOptionPane.showMessageDialog(null, app.returnLoginStatus(loginUsername, loginPassword));
 
-                while (true) {
-                    String menu = """
-                            QuickChat Menu:
-                            1. Send Message
-                            2. Show Sent Messages
-                            3. Exit""";
-                    int option = Integer.parseInt(JOptionPane.showInputDialog(menu));
-
-                    switch (option) {
-                        case 1 -> app.sendMessages();
-                        case 2 -> JOptionPane.showMessageDialog(null, "Coming Soon.");
-                        case 3 -> {
-                            JOptionPane.showMessageDialog(null, "Thank you for using QuickChat. Goodbye!");
-                            System.exit(0);
-                        }
-                        default -> JOptionPane.showMessageDialog(null, "Invalid option. Please select 1, 2, or 3.");
-                    }
-                }
+                // Main menu loop
+                app.runMainMenuLoop();
             } else {
                 JOptionPane.showMessageDialog(null, "Incorrect username or password. (" + attempt + "/3)");
             }
         }
 
-        JOptionPane.showMessageDialog(null, "Too many failed login attempts. The application will now exit.");
-        System.exit(0);
-    }
-    public void storeMessageToJson(Message message) {
-    Gson gson = new GsonBuilder().setPrettyPrinting().create();
-    List<Message> storedMessages = new ArrayList<>();
-
-    // Try to read existing messages
-    try (Reader reader = new FileReader("stored_messages.json")) {
-        Type listType = new TypeToken<List<Message>>() {}.getType();
-        storedMessages = gson.fromJson(reader, listType);
-        if (storedMessages == null) storedMessages = new ArrayList<>();
-    } catch (FileNotFoundException e) {
-        // File doesn't exist — that's OK
-    } catch (IOException e) {
-        JOptionPane.showMessageDialog(null, "Error reading stored messages: " + e.getMessage());
+        if (!loggedIn) {
+            JOptionPane.showMessageDialog(null, "Too many failed login attempts. The application will now exit.");
+            System.exit(0);
+        }
     }
 
-    // Add new message and write to file
-    storedMessages.add(message);
+    /**
+     * Main menu loop extracted for clarity.
+     */
+    private void runMainMenuLoop() {
+        while (true) {
+            String menu = """
+                    QuickChat Menu:
+                    1. Send Message
+                    2. Show Sent Messages
+                    3. Display Senders and Recipients of Sent Messages
+                    4. Display Longest Sent Message
+                    5. Search Message by ID
+                    6. Search Messages by Recipient
+                    7. Delete Message by Hash
+                    8. Display Sent Messages Report
+                    9. Exit
 
-    try (Writer writer = new FileWriter("stored_messages.json")) {
-        gson.toJson(storedMessages, writer);
-    } catch (IOException e) {
-        JOptionPane.showMessageDialog(null, "Error saving message: " + e.getMessage());
+                    Please enter the number of your choice:""";
+            String input = JOptionPane.showInputDialog(menu);
+            if (input == null) {
+                int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to exit?", "Confirm Exit", JOptionPane.YES_NO_OPTION);
+                if (confirm == JOptionPane.YES_OPTION) {
+                    JOptionPane.showMessageDialog(null, "Thank you for using QuickChat. Goodbye!");
+                    System.exit(0);
+                } else {
+                    continue;
+                }
+            }
+            int option;
+            try {
+                option = Integer.parseInt(input);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Invalid input. Please enter a number from 1 to 9.");
+                continue;
+            }
+
+            switch (option) {
+                case 1 -> sendMessages();
+                case 2 -> showSentMessages();
+                case 3 -> displaySendersAndRecipients();
+                case 4 -> displayLongestSentMessage();
+                case 5 -> searchByMessageID();
+                case 6 -> searchMessagesByRecipient();
+                case 7 -> deleteMessageByHash();
+                case 8 -> displaySentMessageReport();
+                case 9 -> {
+                    JOptionPane.showMessageDialog(null, "Thank you for using QuickChat. Goodbye!");
+                    System.exit(0);
+                }
+                default -> JOptionPane.showMessageDialog(null, "Invalid option. Please select 1 to 9.");
+            }
+        }
     }
-  }
+
 }
 
 
