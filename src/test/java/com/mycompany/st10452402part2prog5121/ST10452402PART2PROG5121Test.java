@@ -9,8 +9,19 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
 import java.util.ArrayList;
-/*test cli Part 3 branch 
-*/
+
+/*
+ * @author sohan
+ * Student Number: ST10452402    
+ * Name and Surname: Sohan Seeth    
+ * Module: PROG5121 
+ * Module Code: Programming 1A 
+ * Assessment Type: Assignment 1(POE)
+ * Lecturer Name: Mr Fakazi Ngema 
+ * 
+ * 
+ * 
+ */
 
 
 public class ST10452402PART2PROG5121Test {
@@ -134,13 +145,13 @@ public class ST10452402PART2PROG5121Test {
     @Test
     public void testValidMessageLength() {
         String message = "Hi Mike, can you join us for dinner tonight";
-        assertTrue(message.length() <= 50, "Message should be 50 characters or less.");
+        assertTrue(message.length() <= 250, "Message should be 250 characters or less.");
     }
 
     @Test
     public void testInvalidMessageLength() {
         String message = "This message is intentionally longer than fifty characters to trigger a validation failure.";
-        int excess = message.length() - 50;
+        int excess = message.length() - 250;
         String expected = "Message exceeds 250 characters by " + excess + ", please reduce size.";
         String actual = "Message exceeds 250 characters by " + excess + ", please reduce size.";
         assertEquals(expected, actual);

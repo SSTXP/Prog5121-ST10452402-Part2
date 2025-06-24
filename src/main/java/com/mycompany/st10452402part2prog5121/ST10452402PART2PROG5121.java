@@ -21,11 +21,12 @@ import java.util.regex.Pattern;
  * Name and Surname: Sohan Seeth    
  * Module: PROG5121 
  * Module Code: Programming 1A 
- * Assessment Type: Assignment 1(Part 1 & 2 )
+ * Assessment Type: Assignment 1(POE)
  * Lecturer Name: Mr Fakazi Ngema 
  * 
- * https://youtube/yHP4Cew7WXE?si=pAHC8LO4RF6wl33r -- video of working code (PART 1)
- * 
+ * https://youtu.be/yHP4Cew7WXE -- Part 1 video link
+ * https://youtu.be/cGZHQ2AysA0 -- Part 2 video link
+ *
  */
 
 public class ST10452402PART2PROG5121 {
@@ -178,15 +179,15 @@ public class ST10452402PART2PROG5121 {
                     this::checkCellPhoneNumber
             );
 
-            String content = JOptionPane.showInputDialog("Enter message content (max 50 characters):");
+            String content = JOptionPane.showInputDialog("Enter message content (max 250 characters):");
 
             if (content == null || content.length() == 0) {
                 JOptionPane.showMessageDialog(null, "Message cannot be empty.");
                 i--;
                 continue;
             }
-            if (content.length() > 50) {
-                JOptionPane.showMessageDialog(null, "Please enter a message of 50 characters or less.");
+            if (content.length() > 250) {
+                JOptionPane.showMessageDialog(null, "Please enter a message of 250 characters or less.");
                 i--;
                 continue;
             }

@@ -1,2 +1,16 @@
 [
+  {
+    "messageNumber": "0000000002",
+    "recipientNumber": "+27838884567",
+    "content": "Where are you? You are late! Ihave asked you to be on time.",
+    "messageHash": "00:0000000002:WHERETIME.",
+    "status": 0
+  },
+  {
+    "messageNumber": "0000000005",
+    "recipientNumber": "+27838884567",
+    "content": "OK, Iam leaving without you.",
+    "messageHash": "00:0000000005:OK,YOU.",
+    "status": 0
+  }
 ]
